@@ -24,7 +24,6 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория")
     created_at = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
     updated_at = models.DateTimeField(default=timezone.now, verbose_name="Дата изменения")
-    # manufactured_at = models.DateTimeField(default=timezone.now, verbose_name="Дата производства продукта")
 
     class Meta:
         verbose_name = 'Продукт'

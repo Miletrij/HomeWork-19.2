@@ -9,7 +9,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def json_read_categories():
-        with open('data_category.json') as file:
+        with open('fixtures/data_category.json') as file:
             result = json.load(file)
             commands_list = []
             for item in result:
@@ -18,7 +18,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def json_read_products():
-        with open('data_product.json') as file:
+        with open('fixtures/data_product.json') as file:
             result = json.load(file)
             commands_list = []
             for item in result:
@@ -36,7 +36,6 @@ class Command(BaseCommand):
             )
 
         Category.objects.bulk_create(category_for_create)
-
         for product in Command.json_read_products():
             product_for_create.append(
                 Product(id=product['pk'], category=Category.objects.get(pk=product['fields']['category']),

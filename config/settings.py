@@ -9,11 +9,18 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# DB Settings
+PATH_DB = BASE_DIR / '.env'
+load_dotenv(PATH_DB)
+USER_DB = os.getenv("USER_DB")
+PASSWORD_DB = os.getenv("PASSWORD_DB")
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'catalog'
+    'catalog',
+    'blogging',
 ]
 
 MIDDLEWARE = [
@@ -79,8 +87,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'database',
-        'USER': 'postgres',
-        'PASSWORD': '1'
+        'USER': USER_DB,
+        'PASSWORD': PASSWORD_DB
     }
 }
 

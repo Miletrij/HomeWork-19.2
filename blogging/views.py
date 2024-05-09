@@ -1,13 +1,18 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-#from pytils.translit import slugify
+from pytils.translit import slugify
 
 from blogging.models import Blog
 
 
 class BlogListView(ListView):
     model = Blog
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset().order_by(*args, **kwargs)
+        queryset = queryset.filter(is_published=True)
+        return queryset
 
 
 class BlogDetailView(DetailView):
@@ -28,7 +33,7 @@ class BlogCreateView(CreateView):
     def form_valid(self, form):
         if form.is_valid():
             new_blog = form.save()
-            #new_blog.slug = slugify(new_blog.title)
+            new_blog.slug = slugify(new_blog.title)
             new_blog.save()
 
         return super().form_valid(form)

@@ -8,6 +8,7 @@ from catalog.models import Product
 # Create your views here.
 class HomeListView(ListView):
     model = Product
+    template_name = "catalog/base.html"
 
 
 class ContactsTemplateView(TemplateView):
@@ -27,4 +28,8 @@ class ContactsTemplateView(TemplateView):
 
 
 class ProductDetailView(DetailView):
+    model = Product
+
+
+class ProductListView(ListView):
     model = Product

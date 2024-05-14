@@ -2,10 +2,9 @@ from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView, DetailView
 
-from catalog.models import Product
+from catalog.models import Product, Category
 
 
-# Create your views here.
 class HomeListView(ListView):
     model = Product
     template_name = "catalog/base.html"
@@ -33,3 +32,11 @@ class ProductDetailView(DetailView):
 
 class ProductListView(ListView):
     model = Product
+
+
+class CategoryListView(ListView):
+    model = Category
+
+
+class CategoryDetailView(DetailView):
+    model = Category

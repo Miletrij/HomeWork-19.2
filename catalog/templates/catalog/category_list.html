@@ -1,0 +1,20 @@
+<!doctype html>
+{% extends 'catalog/base.html' %}
+{% block content %}
+{% load my_tags %}
+<div class="row text-center">
+    {% for categorys in category_list %}
+    <div class="col-4">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal" href="{% url 'catalog:category' %}"
+                    type="button">{{ categorys.name }}</h4>
+
+                <a href="{% url 'catalog:category_view' categorys.pk %}" type="button"
+                       class="btn btn-sm btn-block btn-outline-primary">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

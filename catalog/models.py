@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 NULLABLE = {'null': True, 'blank': True}
@@ -13,7 +14,7 @@ class Category(models.Model):
         verbose_name_plural = "Категории"
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
 
 class Product(models.Model):
@@ -30,4 +31,4 @@ class Product(models.Model):
         verbose_name_plural = "Продукты"
 
     def __str__(self):
-        return f"{self.name}{self.price}"
+        return f"{self.name}{self.price}{self.category}"

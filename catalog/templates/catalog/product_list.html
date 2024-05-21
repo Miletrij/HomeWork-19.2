@@ -2,21 +2,31 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 {% load my_tags %}
-    <div class="row text-center">
-        {% for product in product_list %}
-        <div class="col-3">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
-                </div>
-                <div class="card-body">
-                    <img src="{% media_filter product.image %}" alt="Пусто здесь" class="img-fluid">
-                    <h4 class="card-title pricing-card-title">{{ product.price }} руб.</h4>
-                    <a href="{% url 'catalog:product_view' product.pk %}" type="button"
-                       class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
-                </div>
+<a href="{% url 'catalog:create' %}" type="button"
+   class="btn btn-lg btn-block mb-3 btn-outline-primary">Добавить продукт</a>
+<div class="row text-center">
+    {% for product in product_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
+            </div>
+            <div class="card-body">
+                <img src="{% media_filter product.image %}" alt="Пусто здесь" class="img-fluid">
+                <h4 class="card-title pricing-card-title">{{ product.price }} руб.</h4>
+                <a href="{% url 'catalog:product_view' product.pk %}" type="button"
+                   class="btn btn-lg btn-block btn-outline-primary">Подробнее</a>
+                <a href="{% url 'catalog:update' product.pk %}" type="button"
+                   class="btn btn-lg btn-block btn-outline-primary">Изменить</a>
+                <a href="{% url 'catalog:delete' product.pk %}" type="button"
+                   class="btn btn-lg btn-block btn-outline-primary">Удалить</a>
+                {% for status in product.version.all %}
+                <p>Активная версия: <strong> {{ status.name_version }} </strong></p>
+                <p>Номер версии: <strong> {{ status.number_version }} </strong></p>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
 {% endblock %}

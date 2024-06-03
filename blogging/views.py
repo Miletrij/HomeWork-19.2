@@ -32,11 +32,12 @@ class BlogCreateView(CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            new_blog = form.save()
-            new_blog.slug = slugify(new_blog.title)
+            new_blog = form.save(commit=False)
+            new_blog.owner = self.request.user
             new_blog.save()
-
-        return super().form_valid(form)
+            return super().form_valid(form)
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
 
 
 class BlogUpdateView(UpdateView):

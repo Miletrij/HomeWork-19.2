@@ -7,7 +7,7 @@ from common.views import StyleFormMixin
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = "__all__"
+        fields = ('name', 'description', 'image', 'price', 'category', 'user')
 
     def clean_name(self):
         cleaned_data = self.cleaned_data.get('name')
@@ -24,6 +24,12 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
             if word in cleaned_data:
                 raise forms.ValidationError('ай! ай! ай!')
         return cleaned_data
+
+
+class ModeratorProductForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('category', 'description', 'is_published')
 
 
 class VersionForm(StyleFormMixin, forms.ModelForm):

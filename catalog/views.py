@@ -22,7 +22,7 @@ class HomeListView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        context_data['categories'] = get_category_from_cache()
+        context_data['category'] = get_category_from_cache()
         return context_data
 
 
@@ -52,6 +52,12 @@ class ProductListView(ListView):
 
 class CategoryListView(ListView):
     model = Category
+    template_name = 'catalog/product_list.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['category'] = get_category_from_cache()
+        return context_data
 
 
 class CategoryDetailView(DetailView):

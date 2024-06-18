@@ -8,10 +8,10 @@
 {% endif %}
 <div class="row">
     <div class="col-lg-2">
-        {% for categorys in category %}
+        {% for category in categorys %}
         <div class="list-group">
-            <a href="{% url 'catalog:category_view' category.pk %}"
-               class="list-group list-group-item-action">{{ categorys.name }}</a>
+            <a href="{% url 'catalog:category_id' category.pk %}"
+               class="list-group list-group-item-action">{{ category.name }}</a>
         </div>
         {% endfor %}
         <hr>

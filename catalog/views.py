@@ -12,7 +12,7 @@ from catalog.services.services import get_category_from_cache, get_product_from_
 
 class HomeListView(ListView):
     model = Product
-    template_name = "catalog/base.html"
+    #template_name = "catalog/base.html"
 
     def get_queryset(self, *args, **kwargs):
         #queryset = super().get_queryset()
